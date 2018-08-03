@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>InstaPy (Not Instant Pie)</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style type="text/css">
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      pre { font-size: 80%; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+	  img {
+         max-height: 600px;
+         display: block;
+         margin-left: auto;
+         margin-right: auto;
+		 border: 1px solid #000000;
+	  }
+	  .remark-slide-content {
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+	  }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+# InstaPy (Not Instant Pie)
+
+Lee Johnson (LEEJO / leejo / lee@humanstate.com)
+
+(Hit "P" if you're viewing this presentation on the web)
+
+???
+
+A look at the Perl Events Instagram account automation
+
+---
+
+![](img/01.PNG)
+
+???
+
+Started this last year at the Perl Toolchain Summit
+
+---
+
+![](img/02.PNG)
+
+???
+
+I'm posting images from various Perl events I attend and also from others I don't attend
+
+This is a photo from The Perl Conference in Salt Lake City earlier this year, taken by Wendy
+
+I think this is a great photo.
+
+---
+
+![](img/03.PNG)
+
+???
+
+The Perl Conference in Amsterdam last year.
+
+---
+
+![](img/04.PNG)
+
+???
+
+In the off season I'm posting Perl related photos, here's some Perl poetry on my fridge by a couple of friends (who aren't programmers)
+
+I'm trying to keep the content as photographic as possible - no memes, no jokes, just "photos" in the traditional sense.
+
+So everything is uploaded manually and it's curated, and I'm not taking a machine gun approach to uploads. A couple a day during an event and then maybe one or two a month in the off season.
+
+---
+
+![](img/05.PNG)
+
+???
+
+It would be nice to get followers, but this is the kind of content that gets posted to Instagram within the particular target market.
+
+It's not photographic, and I have absolutely no interest in looking at it. So I don't want to wade through a mass of shit.
+
+---
+
+![](img/08.PNG)
+
+???
+
+And of course Instagram is now full of adverts, which I don't want to look at either.
+
+So much blockchain...
+
+Instagram started off as a platform for photography, now it seems to be a marketing platform. We can take advantage of that, right?
+
+---
+
+### Automation to the Rescue!
+
+![](img/instapy.jpg)
+
+???
+
+InstaPy is an automation Script for “farming” Likes, Comments and Followers on Instagram
+
+---
+
+### A Simplified Instagram Bot
+
+```python
+from instapy import InstaPy
+
+session = InstaPy(
+    username=insta_username,
+    password=insta_password,
+    headless_browser=True
+)
+session.login()
+
+# follow everyone we like
+session.set_do_follow(
+    enabled=True,
+    percentage=100,
+    times=2
+)
+
+# like all photos with these tags
+session.like_by_tags(
+	[ 'perl5', 'perl6' ],
+	skip_top_posts=False,
+	amount=25
+)
+
+# end the bot session
+session.end()
+```
+
+???
+
+The library is very simple to use and well documented...
+
+---
+
+### A Simplified Instagram Bot
+
+```python
+*from instapy import InstaPy
+
+*session = InstaPy(
+*   username=insta_username,
+*   password=insta_password,
+*   headless_browser=True
+*)
+*session.login()
+
+# follow everyone we like
+session.set_do_follow(
+    enabled=True,
+    percentage=100,
+    times=2
+)
+
+# like all photos with these tags
+session.like_by_tags(
+	[ 'perl5', 'perl6' ],
+	skip_top_posts=False,
+	amount=25
+)
+
+# end the bot session
+session.end()
+```
+
+???
+
+You login...
+
+---
+
+### A Simplified Instagram Bot
+
+```python
+from instapy import InstaPy
+
+session = InstaPy(
+    username=insta_username,
+    password=insta_password,
+    headless_browser=True
+)
+session.login()
+
+*# follow everyone we like
+*session.set_do_follow(
+*   enabled=True,
+*   percentage=100,
+*   times=2
+*)
+
+# like all photos with these tags
+session.like_by_tags(
+    [ 'perl5', 'perl6' ],
+    skip_top_posts=False,
+    amount=25
+)
+
+# end the bot session
+session.end()
+```
+
+???
+
+Configure the bot, in this case "follow everyone's images that we like"
+
+---
+
+### A Simplified Instagram Bot
+
+```python
+from instapy import InstaPy
+
+session = InstaPy(
+    username=insta_username,
+    password=insta_password,
+    headless_browser=True
+)
+session.login()
+
+# follow everyone we like
+session.set_do_follow(
+    enabled=True,
+    percentage=100,
+    times=2
+)
+
+*# like all photos with these tags
+*session.like_by_tags(
+*   [ 'perl5', 'perl6' ],
+*   skip_top_posts=False,
+*   amount=25
+*)
+
+# end the bot session
+session.end()
+```
+
+???
+
+Then tell it how to find the images to like, here it will find images tagged with "perl5" or "perl6"
+
+---
+
+### Programming Related Tags
+
+```python
+    [
+        # perl!
+        'perl5', 'perl6',
+
+        # the rest
+        'coding', 'codingbootcamp', 'codingisfun', 'codinglife',
+        'computerengineering', 'computerprogramming', 'computing',
+        'cprogramming', 'creativecoding',
+        'development',
+        'erlang',
+        'girlswhocode', 'github', 'golang',
+        'hack', 'hacker',
+        'java', 'javascript',
+        'linux',
+        'opensource',
+        'php', 'programmer', 'programming', 'programmingisfun',
+        'programminglanguage', 'programminglanguages', 'programminglife',
+        'programmingstudents', 'python',
+        'rubyprogramming',
+        'software', 'softwaredeveloper', 'softwaredevelopers',
+        'softwaredevelopment', 'softwareengineer', 'softwareengineering',
+        'softwareengineers', 'softwares', 'startup',
+        'tech',
+        'webdevelopment', 'webprogramming', 'womenintech', 'womenwhocode',
+    ]
+```
+
+???
+
+Of course we look for more images than just those tagged with "perl5" or "perl6"
+
+The script takes a few hours to run due to the number of tags, and it throttles itself to prevent it hitting the API limits.
+
+---
+### Figuring out the correct tags to follow
+
+```git
+commit 9e40abd6c539e971443834bac9eba2b288a72da2
+Author: Lee Johnson <lee@givengain.ch>
+Date:   Fri Apr 20 21:22:58 2018 +0200
+
+    be more specific with the #perl hashtag
+
+    use #perl5 instead so we don't end up following a load of
+    non-programming related accounts
+```
+
+```diff
+diff --git a/bin/instagram_bot.py b/bin/instagram_bot.py
+index 7a831ce..8e01564 100644
+--- a/bin/instagram_bot.py
++++ b/bin/instagram_bot.py
+@@ -47,7 +47,7 @@ try:
+     # like all photos with these tags
+     session.like_by_tags(
+         [
+-            'perl',
++            'perl5',
+             'perl6',
+             'c',
+             'code',
+```
+
+???
+
+Following #perl lead to a mass of jewellery/makeup related accounts
+
+---
+
+![](img/11.PNG)
+
+???
+
+And of course we end up following lots of not-actually-programming-related accounts due to other tags anyway
+
+Python...
+
+---
+
+![](img/10.PNG)
+
+???
+
+But the hit rate is reasonable, and the return isn't bad either.
+
+The library has functions to unfollow users depending on particular settings so we don't hit limits on those.
+
+---
+
+![](img/12.PNG)
+
+???
+
+And those accounts that we do get right can be pretty interesting and help us to get out of the echo chamber maybe?
+
+A coder in Mexico
+
+---
+
+![](img/13.PNG)
+
+???
+
+An aspiring developer
+
+---
+
+![](img/14.PNG)
+
+???
+
+Liverpool Girl Geeks
+
+---
+
+![](img/15.PNG)
+
+???
+
+Founders of coding related groups
+
+Maybe they're now aware of Perl thanks to the bot?
+
+We're up to about 2,000 followers after running the script once a day for about four months. If even 5% of them are now a little bit more aware of Perl then it's probably a good return on the investment of the hour or so it took me to put it together.
+
+---
+
+![](img/16.PNG)
+
+???
+
+The Perl Events Instagram bot is casting a very wide net, it's possible to be much more specific with the InstaPy library (read the docs, it's very configurable and even has options to try to detect *other* bot based accounts - a bit of a contradiction, but whatever)
+
+This account is for the gallery I'm involved with in the village back home
+
+---
+### Location Based Liking
+
+```python
+session.like_by_locations(
+    [
+        # actual places
+        '216921418/villars/',
+        '241218410/villars-vaud-switzerland/',
+        '670455/villars-sur-ollon/',
+        '261044104/sur-les-pistes-villars/',
+        '293286136/bretaye/',
+        '256352451/gryon-switzerland/',
+        '259527434/bex-vaud/',
+        ...
+    ],
+    amount=25,
+    skip_top_posts=False
+)
+```
+
+???
+
+It has a small selection of hash tags to follow, but concentrates more on those images that are geo-tagged in the local area.
+
+The idea is that any visitors to the village who post to Instagram, and geo-tag their images, will be made aware of the gallery within a few hours of posting. This tends to happen quite a lot during the ski season.
+
+Has it worked? We've had a couple of visitors tell us that they heard about us through Instagram, so yes
+
+---
+
+![](img/17.PNG)
+
+???
+
+Instagram *is* now a marketing platform
+
+This is an image I posted to my own account about eighteen months ago. I geo-tagged and hash-tagged it and got the occasional like from businesses in the area for several months after I uploaded it (It's not an interesting image, but anyway). The tags as generic as they come, and nobody is scrolling through the millions of images just to like yet another images of a sunset from an airplane window. Just the bots.
+
+If your account is public, and you're tagging your images, then I'm willing to bet that at least 50% of the likes are automated and maybe even some of the comments.
+
+Likes are meaningless in a social media context, it seems like a conditioned reflex for many users. It's why I've never liked an update, post, photo, comment, or anything else on social media, nor will I ever "like" them. If I really like something I'll tell you directly.
+
+---
+
+### Swiss Perl Workshop 2018
+
+![](img/18.png)
+
+???
+
+One last thing - if you're interested in photography I'm giving a talk at this year's Swiss Perl Workshop, in Bern, about using this camera, plus a little Perl code, to move mountains.
+
+---
+
+## ~~Questions?~~ / References
+
+InstaPy:
+
+ * [Overview](https://timgrossmann.github.io/InstaPy/)
+ * [Blog Post About It](https://medium.freecodecamp.org/my-open-source-instagram-bot-got-me-2-500-real-followers-for-5-in-server-costs-e40491358340)
+ * [GitHub Page](https://github.com/timgrossmann/InstaPy)
+
+Perl Events:
+
+ * [InstaPy Bot](https://github.com/leejo/perl_events)
+ * [Instagram Account](https://www.instagram.com/perl_events/)
+
+Me:
+
+ * [Instagram Account](https://www.instagram.com/leejebay/) (private, no bot, i probably won't follow you back).
+ * [Galerie Alpine Instagram Account](https://www.instagram.com/galeriealpine/)
+
+???
+
+If you're interested in more here are the links to the various accounts and scripts on github
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+        var slideshow = remark.create({
+            highlightLines: true,
+			slideNumberFormat: ""
+        });
+    </script>
+  </body>
+</html>
